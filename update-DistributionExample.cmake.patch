@@ -1,5 +1,5 @@
 diff --git a/clang/cmake/caches/DistributionExample-stage2.cmake b/clang/cmake/caches/DistributionExample-stage2.cmake
-index 99d5dc0fd2fe..2176d4e74db4 100644
+index 99d5dc0fd..f7879785b 100644
 --- a/clang/cmake/caches/DistributionExample-stage2.cmake
 +++ b/clang/cmake/caches/DistributionExample-stage2.cmake
 @@ -1,8 +1,8 @@
@@ -8,25 +8,36 @@ index 99d5dc0fd2fe..2176d4e74db4 100644
  
 -set(LLVM_ENABLE_PROJECTS "clang;clang-tools-extra;lld" CACHE STRING "")
 -set(LLVM_ENABLE_RUNTIMES "compiler-rt;libcxx;libcxxabi" CACHE STRING "")
-+set(LLVM_ENABLE_PROJECTS "clang;clang-tools-extra;lld;clang-tidy" CACHE STRING "")
++set(LLVM_ENABLE_PROJECTS "clang;clang-tools-extra;lld;clang-tidy;libtool;llvm-ar" CACHE STRING "")
 +set(LLVM_ENABLE_RUNTIMES "compiler-rt;libunwind;libcxx;libcxxabi" CACHE STRING "")
  
  set(LLVM_TARGETS_TO_BUILD X86;ARM;AArch64 CACHE STRING "")
  
-@@ -20,6 +20,11 @@ set(LLVM_TOOLCHAIN_TOOLS
+@@ -13,13 +13,19 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -gline-tables-only -DNDEBUG" CACHE STRIN
+ # setup toolchain
+ set(LLVM_INSTALL_TOOLCHAIN_ONLY ON CACHE BOOL "")
+ set(LLVM_TOOLCHAIN_TOOLS
+-  dsymutil
+   llvm-cov
+-  llvm-dwarfdump
+   llvm-profdata
    llvm-objdump
    llvm-nm
-   llvm-size
+-  llvm-size
 +  llvm-dwp
 +  clang-tidy
 +  llvm-objcopy
 +  llvm-strip
 +  clang-format
++  llvm-libtool-darwin
++  llvm-ar
++  clangd
++  lld
    CACHE STRING "")
  
  set(LLVM_DISTRIBUTION_COMPONENTS
 diff --git a/clang/cmake/caches/DistributionExample.cmake b/clang/cmake/caches/DistributionExample.cmake
-index 50fcc09cf078..9a0b12ef7df9 100644
+index 50fcc09cf..9a0b12ef7 100644
 --- a/clang/cmake/caches/DistributionExample.cmake
 +++ b/clang/cmake/caches/DistributionExample.cmake
 @@ -2,7 +2,7 @@
@@ -38,3 +49,4 @@ index 50fcc09cf078..9a0b12ef7df9 100644
  
  # Only build the native target in stage1 since it is a throwaway build.
  set(LLVM_TARGETS_TO_BUILD Native CACHE STRING "")
+
