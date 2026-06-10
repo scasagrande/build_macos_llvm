@@ -1,5 +1,15 @@
+From 795240a8ab02ddbc8feeec8681b52346548ff292 Mon Sep 17 00:00:00 2001
+From: Steven Casagrande <stevencasagrande@gmail.com>
+Date: Wed, 10 Jun 2026 13:13:19 -0400
+Subject: [PATCH] update DistributionExample.cmake
+
+---
+ .../caches/DistributionExample-stage2.cmake     | 17 ++++++++++++-----
+ clang/cmake/caches/DistributionExample.cmake    |  2 +-
+ 2 files changed, 13 insertions(+), 6 deletions(-)
+
 diff --git a/clang/cmake/caches/DistributionExample-stage2.cmake b/clang/cmake/caches/DistributionExample-stage2.cmake
-index 99d5dc0fd..f7879785b 100644
+index 99d5dc0fd..822960b80 100644
 --- a/clang/cmake/caches/DistributionExample-stage2.cmake
 +++ b/clang/cmake/caches/DistributionExample-stage2.cmake
 @@ -1,8 +1,8 @@
@@ -8,18 +18,19 @@ index 99d5dc0fd..f7879785b 100644
  
 -set(LLVM_ENABLE_PROJECTS "clang;clang-tools-extra;lld" CACHE STRING "")
 -set(LLVM_ENABLE_RUNTIMES "compiler-rt;libcxx;libcxxabi" CACHE STRING "")
-+set(LLVM_ENABLE_PROJECTS "clang;clang-tools-extra;lld;clang-tidy;libtool;llvm-ar" CACHE STRING "")
++set(LLVM_ENABLE_PROJECTS "clang;clang-tools-extra;lld;clang-tidy;libtool;llvm-ar;llvm-as" CACHE STRING "")
 +set(LLVM_ENABLE_RUNTIMES "compiler-rt;libunwind;libcxx;libcxxabi" CACHE STRING "")
  
  set(LLVM_TARGETS_TO_BUILD X86;ARM;AArch64 CACHE STRING "")
  
-@@ -13,13 +13,19 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -gline-tables-only -DNDEBUG" CACHE STRIN
+@@ -13,13 +13,20 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O3 -gline-tables-only -DNDEBUG" CACHE STRIN
  # setup toolchain
  set(LLVM_INSTALL_TOOLCHAIN_ONLY ON CACHE BOOL "")
  set(LLVM_TOOLCHAIN_TOOLS
 -  dsymutil
    llvm-cov
 -  llvm-dwarfdump
++  llvm-as
    llvm-profdata
    llvm-objdump
    llvm-nm
@@ -49,4 +60,6 @@ index 50fcc09cf..9a0b12ef7 100644
  
  # Only build the native target in stage1 since it is a throwaway build.
  set(LLVM_TARGETS_TO_BUILD Native CACHE STRING "")
+-- 
+2.54.0
 
